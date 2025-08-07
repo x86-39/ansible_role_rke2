@@ -4,5 +4,34 @@
   community.general.zypper:
     name: "{{ rke2_dependencies }}"
     state: present
+  register: rke2_dependencies_install
+
+- name: "Ensure iscsi service is enabled and started"
+  become: true
+  ansible.builtin.systemd:
+    name: iscsid
+    state: started
+    enabled: true
+
+- name: "Replace kernel-default-base with kernel-default"
+  block:
+    - name: "Ensure kernel-default is installed"
+      become: true
+      community.general.zypper:
+        name: kernel-default
+        state: present
+        force_resolution: true
+      notify: 
+        - Reboot host
+
+    - name: "Ensure kernel-default-base is removed"
+      become: true
+      community.general.zypper:
+        name: kernel-default-base
+        state: absent
+
+# Meta flush handlers
+- ansible.builtin.meta: flush_handlers
+  run_once: true
 
 ...

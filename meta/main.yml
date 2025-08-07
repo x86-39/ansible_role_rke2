@@ -1,7 +1,7 @@
 galaxy_info:
-  author: diademiemi
-  namespace: diademiemi
-  company: diademiemi
+  author: x86-39
+  namespace: x86_39
+  company: x86-39
   description: Ansible role to install and configure rke2
   role_name: rke2
 

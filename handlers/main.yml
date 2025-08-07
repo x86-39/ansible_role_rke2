@@ -1,3 +1,10 @@
 ---
+- name: Reboot host
+  become: true
+  ansible.builtin.reboot:
+    msg: "Rebooting to apply changes."
+    pre_reboot_delay: 3
+    post_reboot_delay: 15
+  register: reboot_status
 
 ...
