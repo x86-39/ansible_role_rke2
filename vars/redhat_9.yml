@@ -1,9 +1,0 @@
----
-_rke2_dependencies:
-  - iscsi-initiator-utils
-  - nfs-utils
-  - gzip
-  - tar
-  - curl-minimal
-
-...

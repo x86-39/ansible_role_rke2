@@ -1,22 +1,20 @@
 Ansible Role RKE2
 =========
 
-[![Molecule Test](https://github.com/diademiemi/ansible_role_rke2/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_role_rke2/actions/workflows/molecule.yml)
+[![Molecule Test](https://github.com/x86-39/ansible_role_rke2/actions/workflows/molecule.yml/badge.svg)](https://github.com/x86-39/ansible_role_rke2/actions/workflows/molecule.yml)
 
-This is an Ansible role to install and configure rke2.
-
-Include more information about rke2 in this section.
+This is an Ansible role to install and configure rke2 with auto clustering.
 
 Requirements
 ------------
 These platforms are supported:
-- Ubuntu 20.04  
 - Ubuntu 22.04  
-- Debian 11  
-- EL 8 (Tested on Rocky Linux 8)  
+- Ubuntu 24.04  
+- Debian 12  
 - EL 9 (Tested on Rocky Linux 9)  
-- Fedora 40  
-- openSUSE Leap 15.5
+- EL 10 (Tested on Rocky Linux 10)  
+- Fedora 42  
+- openSUSE Leap 15.6
 
 <!--
 - List hardware requirements here  
@@ -29,9 +27,9 @@ Variable | Default | Description
 --- | --- | ---
 `rke2_role_name` | `rke2` | Name of role role in collection Rancher
 `rke2_script_url` | `https://get.rke2.io` | URL of the RKE2 setup script
-`rke2_channel` | `v1.24` | RKE2 release channel. v1.24 is the latest supported for Rancher
+`rke2_channel` | `v1.32` | RKE2 release channel. v1.32 is the latest supported for Rancher
 `rke2_tls_san` | `["{{ ansible_domain }}"]` | List of additional domains to add to the RKE2 server certificate
-`rke2_type` | `server` | RKE2 type. Options: `[server, agent]`
+`rke2_type` | `server` | RKE2 type. Options: `[server, agent]` (This can be seen as master/worker)
 `rke2_server_token` | ` ` | RKE2 server token to set. Will be generated at runtime if unset.
 `rke2_auto_cluster` | `true` | Automatically put all nodes in the current play in a single cluster. Use the first hosts as initial server.
 `rke2_server_ip` | ` ` | If this variable is set, nodes will register to this existing server. Must not be set on the initial host.
@@ -51,11 +49,12 @@ Example Playbook
 ----------------
 
 ```yaml
-- name: Use diademiemi.rke2 role
+- name: Use x86_39.rke2 role
   hosts: "{{ target | default('rke2') }}"
   roles:
-    - role: "diademiemi.rke2"
-      tags: ['diademiemi', 'rke2', 'setup']    ```
+    - role: "x86_39.rke2"
+      tags: ['x86_39', 'rke2', 'setup']
+```
 
 ```
 
@@ -67,7 +66,7 @@ MIT
 Author Information
 ------------------
 
-- diademiemi (@diademiemi)
+- Jasmijn Emilia Rosalina Knoope (@x86-39)
 
 Role Testing
 ------------

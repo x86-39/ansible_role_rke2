@@ -1,8 +1,14 @@
 ---
-- name: Install Kubernetes volume dependencies
+- name: Install Kubernetes dependencies
   become: true
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "{{ rke2_dependencies }}"
     state: present
+
+- name: Import Rancher pgp public key
+  become: true
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://rpm.rancher.io/public.key
 
 ...

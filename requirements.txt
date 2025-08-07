@@ -1,11 +1,10 @@
 yamllint
 ansible-lint
-ansible==9.6.1
+ansible==11.8.0
 ansible-compat
 antsibull-changelog
 antsibull-docs
-docker>=7.1.0
-requests==2.31.0
-molecule==24.6.0
-molecule-plugins[docker]==23.5.3
+requests==2.32.4
+molecule==25.7.0
+molecule-plugins[podman]==23.7.0
 jmespath

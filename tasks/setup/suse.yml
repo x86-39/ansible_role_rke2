@@ -21,7 +21,7 @@
         name: kernel-default
         state: present
         force_resolution: true
-      notify: 
+      notify:
         - Reboot host
 
     - name: "Ensure kernel-default-base is removed"
@@ -30,8 +30,8 @@
         name: kernel-default-base
         state: absent
 
-# Meta flush handlers
-- ansible.builtin.meta: flush_handlers
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
   run_once: true
 
 ...

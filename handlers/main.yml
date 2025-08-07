@@ -6,5 +6,7 @@
     pre_reboot_delay: 3
     post_reboot_delay: 15
   register: reboot_status
+  when:
+    - "'molecule-notest' not in ansible_skip_tags"
 
 ...

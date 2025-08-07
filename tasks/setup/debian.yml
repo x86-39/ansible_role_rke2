@@ -1,5 +1,5 @@
 ---
-- name: Install Kubernetes volume dependencies
+- name: Install Kubernetes dependencies
   become: true
   ansible.builtin.apt:
     name: "{{ rke2_dependencies }}"

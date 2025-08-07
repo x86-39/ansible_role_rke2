@@ -24,9 +24,9 @@
       failed_when: false
 
   tasks:
-    - name: "Include diademiemi.rke2"
+    - name: "Include x86_39.rke2"
       ansible.builtin.include_role:
-        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+        name: x86_39.rke2
       vars:
         rke2_auto_cluster: false
 

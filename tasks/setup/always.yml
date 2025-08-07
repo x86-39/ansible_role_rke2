@@ -12,6 +12,10 @@
   ansible.builtin.setup:
     gather_subset: network
 
+- name: Output default ipv4 address
+  ansible.builtin.debug:
+    msg: "Default IPv4 address: {{ ansible_default_ipv4.address }}"
+
 - name: Set rke2_server_ip to first host if not defined
   # Select a "master" server node which will be uwsed to bootstrap the cluster
   ansible.builtin.set_fact:
@@ -32,7 +36,7 @@
     # This is a.... solution. It's not a pretty one. As in, it works! but it's not very maintainable, that I agree. I might revisit this problem one day.
     # But my ansible brain rot came up with this and hey, it works pretty consistently it seems.
     _rke_types_dict: "
-      {%- set ns = namespace(hostlist = []) -%}
+      {%- set ns = namespace(hostlist=[]) -%}
       {% for host in ansible_play_hosts %}
         {% if hostvars[host].ansible_default_ipv4.address is defined %}
           {%- set ns.hostlist = ns.hostlist +
@@ -213,13 +217,11 @@
     mode: "u=rw,g=,o="
   when: rke2_yaml.stat.exists
 
-# - name: "Server | Create rke2 symlink"
-#   become: true
-#   ansible.builtin.file:
-#     src: /opt/rke2/bin/rke2
-#     dest: /usr/local/bin/rke2
-#     state: link
-#     force: true
+- name: "Check if /var/lib/rancher/rke2/bin/kubectl exists"
+  become: true
+  ansible.builtin.stat:
+    path: /var/lib/rancher/rke2/bin/kubectl
+  register: kubectl_stat
 
 - name: "Server | Create kubectl symlink"
   become: true
@@ -228,6 +230,13 @@
     dest: /usr/local/bin/kubectl
     state: link
     force: true
+  when: kubectl_stat.stat.exists
+
+- name: "Check if /var/lib/rancher/rke2/bin/crictl exists"
+  become: true
+  ansible.builtin.stat:
+    path: /var/lib/rancher/rke2/bin/crictl
+  register: crictl_stat
 
 - name: "Server | Create crictl symlink"
   become: true
@@ -236,5 +245,6 @@
     dest: /usr/local/bin/crictl
     state: link
     force: true
+  when: crictl_stat.stat.exists
 
 ...

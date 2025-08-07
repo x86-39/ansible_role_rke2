@@ -1,7 +1,7 @@
 ---
 rke2_role_name: "rke2"
 rke2_script_url: "https://get.rke2.io"
-rke2_channel: "v1.24" # Latest is 1.26, this is latest supported by Rancher
+rke2_channel: "v1.32" # Latest is 1.33, this is latest supported by Rancher, https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/rancher-v2-11-4/
 rke2_tls_san:
   - "{{ ansible_domain }}"
 

@@ -10,4 +10,11 @@
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 
+- name: "Ensure iscsi service is enabled and started"
+  become: true
+  ansible.builtin.systemd:
+    name: iscsid
+    state: started
+    enabled: true
+
 ...

@@ -7,5 +7,6 @@ _rke2_dependencies:
   - gzip
   - tar
   - curl
+  - iproute2
 
 ...
