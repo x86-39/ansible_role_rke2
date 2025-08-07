@@ -23,6 +23,17 @@
       changed_when: false
       failed_when: false
 
+    # https://github.com/rocky-linux/sig-cloud-instance-images/issues/56#issuecomment-2676249917
+    - name: Check if /etc/shadow is readable
+      ansible.builtin.stat:
+        path: /etc/shadow
+      register: shadow_stat
+
+    - name: Ensure /etc/shadow isn't unreadable
+      ansible.builtin.command: chmod 0400 /etc/shadow
+      when: ansible_os_family == 'RedHat' and shadow_stat.stat.mode != '0400'
+      changed_when: true
+
   tasks:
     - name: "Include x86_39.rke2"
       ansible.builtin.include_role:

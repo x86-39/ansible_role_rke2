@@ -14,7 +14,7 @@ These platforms are supported:
 - EL 9 (Tested on Rocky Linux 9)  
 - EL 10 (Tested on Rocky Linux 10)  
 - Fedora 42  
-- openSUSE Leap 15.6
+- openSUSE Leap 16.0 (BETA, but I'm targeting this)  
 
 <!--
 - List hardware requirements here  

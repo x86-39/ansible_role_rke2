@@ -12,6 +12,8 @@
     name: iscsid
     state: started
     enabled: true
+  when:
+    - "'molecule-notest' not in ansible_skip_tags"
 
 - name: "Replace kernel-default-base with kernel-default"
   block:
